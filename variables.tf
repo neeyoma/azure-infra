@@ -55,3 +55,19 @@ variable "tags" {
     Owner       = "NetEng"
   }
 }
+
+variable "existing_key_vault_name" {
+  type        = string
+  description = "Name of the existing Azure Key Vault"
+}
+
+variable "existing_key_vault_rg" {
+  type        = string
+  description = "Resource Group of the existing Azure Key Vault"
+}
+
+variable "secret_name" {
+  type        = string
+  description = "Name of the secret to fetch from the Key Vault"
+}
+
