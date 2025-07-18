@@ -1,0 +1,29 @@
+# Required resource configuration
+resource_group_name = "rg-webapp-infrastructure"
+location            = "East US"
+vnet_name           = "vnet-webapp"
+admin_username      = "azureuser"
+
+# Optional: Customize CIDR ranges (optional override of defaults)
+vnet_address_space  = ["10.0.0.0/16"]
+web_subnet_prefix   = "10.0.1.0/24"
+app_subnet_prefix   = "10.0.2.0/24"
+db_subnet_prefix    = "10.0.3.0/24"
+
+# Tags applied to all resources
+tags = {
+  Environment = "Production"
+  Project     = "WebApp-Infrastructure"
+  Owner       = "NetEng"
+  CostCenter  = "Network"
+}
+
+# Existing Key Vault configuration
+existing_key_vault_name = "kv-web-infra"
+existing_key_vault_rg   = "rg-web-infra-kv"
+
+# Secret name for SQL admin password (must already exist in Key Vault)
+secret_name = "sqladminpass"
+
+# Secret name for SSH public key used by VMSS (must already exist in Key Vault)
+ssh_public_key_secret_name = "infrawebadmin"
