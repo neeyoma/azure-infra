@@ -1,7 +1,13 @@
-# SSH Key for VMSS
-resource "tls_private_key" "vmss_ssh" {
-  algorithm = "ED25519"
+data "azurerm_key_vault" "existing" {
+  name                = var.existing_key_vault_name
+  resource_group_name = var.existing_key_vault_rg
 }
+
+data "azurerm_key_vault_secret" "ssh_public_key" {
+  name         = var.ssh_public_key_secret_name
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
 
 # The Virtual Machine Scale Set
 resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
@@ -43,7 +49,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
 
   admin_ssh_key {
     username   = var.admin_username
-    public_key = tls_private_key.vmss_ssh.public_key_openssh
+    public_key = data.azurerm_key_vault_secret.ssh_public_key.value
   }
 
   tags = var.tags
@@ -221,15 +227,6 @@ resource "azurerm_private_dns_zone_virtual_network_link" "sql_dns_vnet_link" {
   resource_group_name   = var.resource_group_name
   private_dns_zone_name = azurerm_private_dns_zone.sql_dns_zone.name
   virtual_network_id    = var.vnet_id
-
-  tags = var.tags
-}
-
-# Store SSH private key in Key Vault
-resource "azurerm_key_vault_secret" "vmss_ssh_private_key" {
-  name         = "vmss-ssh-private-key"
-  value        = tls_private_key.vmss_ssh.private_key_pem
-  key_vault_id = var.key_vault_id
 
   tags = var.tags
 }
