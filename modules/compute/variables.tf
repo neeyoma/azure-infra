@@ -38,12 +38,6 @@ variable "admin_username" {
   type        = string
 }
 
-variable "sql_admin_password" {
-  description = "SQL admin password"
-  type        = string
-  sensitive   = true
-}
-
 variable "key_vault_id" {
   description = "ID of the Key Vault"
   type        = string
