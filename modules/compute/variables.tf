@@ -47,3 +47,8 @@ variable "tags" {
   description = "Tags to apply to resources"
   type        = map(string)
 }
+
+variable "existing_key_vault_name" {}
+variable "existing_key_vault_rg" {}
+variable "ssh_public_key_secret_name" {}
+
