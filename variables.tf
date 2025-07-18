@@ -59,15 +59,23 @@ variable "tags" {
 variable "existing_key_vault_name" {
   type        = string
   description = "Name of the existing Azure Key Vault"
+  default     = "kv-web-infra"
 }
 
 variable "existing_key_vault_rg" {
   type        = string
   description = "Resource Group of the existing Azure Key Vault"
+  default     = "rg-web-infra-kv"
 }
 
 variable "secret_name" {
   type        = string
   description = "Name of the secret to fetch from the Key Vault"
+  default     = sqladminpass
 }
 
+variable "ssh_public_key_secret_name" {
+  type        = string
+  description = "ssh key used to gain access to VMSS instances"
+  default     = "infrawebadmin"
+}
