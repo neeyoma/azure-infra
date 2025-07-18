@@ -48,7 +48,18 @@ variable "tags" {
   type        = map(string)
 }
 
-variable "existing_key_vault_name" {}
-variable "existing_key_vault_rg" {}
-variable "ssh_public_key_secret_name" {}
+variable "existing_key_vault_name" {
+  type        = string
+  description = "Name of the existing Azure Key Vault"
+}
+
+variable "existing_key_vault_rg" {
+  type        = string
+  description = "Resource Group of the existing Azure Key Vault"
+}
+
+variable "ssh_public_key_secret_name" {
+  type        = string
+  description = "ssh key used to gain access to VMSS instances"
+}
 
