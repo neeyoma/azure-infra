@@ -164,7 +164,7 @@ resource "azurerm_mssql_server" "sql_server" {
   location                     = var.location
   version                      = "12.0"
   administrator_login          = var.admin_username
-  administrator_login_password = var.sql_admin_password
+  administrator_login_password = data.azurerm_key_vault_secret.sql_admin_password.value
   
   # Disabling public network access
   public_network_access_enabled = false
