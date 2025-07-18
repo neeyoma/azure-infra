@@ -18,7 +18,7 @@ The infrastructure consists of:
 1. **Azure CLI** installed and authenticated
 2. **Terraform** (>= 1.0) installed
 3. **Azure subscription** with appropriate permissions
-4. **Service Principal** or **User Account** with Contributor and Key Vault Administrator roles
+4. **Service Principal** or **User Account** with appropriate permissions
 
 ## Quick Start
 
