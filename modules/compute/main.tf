@@ -8,6 +8,10 @@ data "azurerm_key_vault_secret" "ssh_public_key" {
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
+data "azurerm_key_vault_secret" "sql_admin_password" {
+  name         = var.secret_name
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
 
 # The Virtual Machine Scale Set
 resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
@@ -135,14 +139,8 @@ resource "azurerm_linux_web_app" "app_service" {
 
   site_config {}
     
-    # Enable VNet integration
-    vnet_route_all_enabled = true
+   
   }
-
-  app_settings = {}
-
-  tags = var.tags
-}
 
 # The VNet Integration for App Service
 resource "azurerm_app_service_virtual_network_swift_connection" "app_service_vnet_integration" {

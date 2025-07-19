@@ -3,7 +3,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=3.0.0"
+      version = "~>3.1"
     }
     random = {
       source  = "hashicorp/random"
@@ -33,6 +33,11 @@ data "azurerm_key_vault" "existing" {
 
 data "azurerm_key_vault_secret" "sql_admin_password" {
   name         = var.secret_name
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
+data "azurerm_key_vault_secret" "ssh_public_key" {
+  name         = var.ssh_public_key_secret_name
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
@@ -70,8 +75,10 @@ module "compute" {
   vnet_id                          = module.networking.vnet_id
   load_balancer_backend_pool_id    = module.networking.load_balancer_backend_pool_id
   admin_username                   = var.admin_username
-  sql_admin_password               = data.azurerm_key_vault_secret.sql_admin_password.value
-  key_vault_id                     = module.key_vault.key_vault_id
+  existing_key_vault_name          = var.existing_key_vault_name
+  existing_key_vault_rg            = var.existing_key_vault_rg
+  ssh_public_key_secret_name       = var.ssh_public_key_secret_name
+  secret_name = var.secret_name
   tags                             = var.tags
 }
 

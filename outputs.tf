@@ -58,12 +58,5 @@ output "sql_private_endpoint_fqdn" {
   value       = module.compute.sql_private_endpoint_fqdn
 }
 
-output "key_vault_name" {
-  description = "The name of the Key Vault"
-  value       = module.key_vault.key_vault_name
-}
 
-output "key_vault_uri" {
-  description = "The URI of the Key Vault"
-  value       = module.key_vault.key_vault_uri
-}
+

@@ -71,7 +71,7 @@ variable "existing_key_vault_rg" {
 variable "secret_name" {
   type        = string
   description = "Name of the secret to fetch from the Key Vault"
-  default     = sqladminpass
+  default     = "sqladminpass"
 }
 
 variable "ssh_public_key_secret_name" {

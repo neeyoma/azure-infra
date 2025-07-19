@@ -39,8 +39,6 @@ resource "azurerm_subnet" "db" {
   virtual_network_name = azurerm_virtual_network.main.name
   address_prefixes     = [var.db_subnet_prefix]
 
-  # Enabling the private endpoint network policies
-  private_endpoint_network_policies_enabled = false
 }
 
 # The Public IP for the Load Balancer

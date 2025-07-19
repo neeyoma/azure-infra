@@ -38,11 +38,6 @@ variable "admin_username" {
   type        = string
 }
 
-variable "key_vault_id" {
-  description = "ID of the Key Vault"
-  type        = string
-}
-
 variable "tags" {
   description = "Tags to apply to resources"
   type        = map(string)
@@ -63,3 +58,7 @@ variable "ssh_public_key_secret_name" {
   description = "ssh key used to gain access to VMSS instances"
 }
 
+variable "secret_name" {
+  description = "Name of the secret for SQL admin password"
+  type        = string
+}
