@@ -77,6 +77,14 @@ jobs:
           
           echo "✅ Successfully created and pushed tag: $TAG"
 
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.determine_tag.outputs.tag }}
+          name: Release ${{ steps.determine_tag.outputs.tag }}
+          generateReleaseNotes: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Summary
         run: |
           TAG="${{ steps.determine_tag.outputs.tag }}"
