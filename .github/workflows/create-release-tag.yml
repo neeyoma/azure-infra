@@ -81,7 +81,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.determine_tag.outputs.tag }}
-          name: Release ${{ steps.determine_tag.outputs.tag }}
+          name: ${{ steps.determine_tag.outputs.tag }}
           generateReleaseNotes: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
